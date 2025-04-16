@@ -7,12 +7,14 @@ import mapboxgl from 'mapbox-gl'
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+const mapboxKey = process.env.NEXT_PUBLIC_MAPBOX_KEY;
+
 export default function MapView() {
   const mapRef = useRef()
   const mapContainerRef = useRef()
 
   useEffect(() => {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuZ3VubmVsczgiLCJhIjoiY205ajA1d29kMDdzMTJscHZtaDk4Y3BjdCJ9.2ByOYNWjFKhVq0BMjZbaPQ'
+    mapboxgl.accessToken = mapboxKey
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
     });

@@ -5,7 +5,7 @@ export default function ListView() {
     
 
     return (
-        <div className="bg-white rounded-md p-4 shadow-md max-h-96 overflow-y-auto w-[250px]">
+        <div className="bg-white text-black rounded-md p-4 shadow-md max-h-96 overflow-y-auto w-[250px]">
             <h2 className="text-lg font-semibold mb-3">Locations</h2>
             <ul className="space-y-2">
                 <li className="border-b pb-2">New York</li>
