@@ -1,13 +1,10 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Kirang_Haerang } from "next/font/google";
+import Header from "../components/Header"
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const kirangHaerang = Kirang_Haerang({
+  variable: "--font-kirang-haerang",
+  weight: '400', 
   subsets: ["latin"],
 });
 
@@ -20,8 +17,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${kirangHaerang.variable} antialiased`}
       >
+        <Header/>
         {children}
       </body>
     </html>
