@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",                  // Make sure this is set
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]               // Matches imports like '@/generated/prisma'
     }
   }
 }
