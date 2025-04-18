@@ -1,0 +1,26 @@
+{
+  "adjectives": [
+    "agile", "ancient", "arctic", "awkward", "bashful", "bizarre", "blissful", "breezy", "brave", "bubbly", "burly",
+    "cheerful", "cloudy", "cozy", "crispy", "crystal", "curious", "dainty", "dapper", "dizzy", "dreamy",
+    "dusty", "elated", "fancy", "fiery", "fluffy", "foggy", "fragrant", "frosty", "funky", "fuzzy",
+    "giddy", "gleaming", "gloomy", "glorious", "gritty", "groovy", "grumpy", "handsome", "hasty", "hollow",
+    "icy", "jazzy", "jumpy", "leafy", "lighthearted", "lunar", "luminous", "melodic", "minty", "misty",
+    "muddy", "neat", "noisy", "nutty", "odd", "ornate", "peaceful", "peppery", "perky", "petite",
+    "plucky", "pointy", "quirky", "radiant", "rainy", "raspy", "restless", "rocky", "rosy", "rustic",
+    "sandy", "sassy", "shaggy", "shiny", "shy", "sleek", "slimy", "slippery", "smoky", "snappy",
+    "snowy", "snug", "soapy", "spicy", "spooky", "sprightly", "squishy", "stormy", "sunny", "swift",
+    "tasty", "tender", "thirsty", "tidy", "tranquil", "twinkly", "vibrant", "watery", "whimsical", "windy"
+  ],
+  "nouns": [
+    "acorn", "anchor", "archer", "astronaut", "avalanche", "badge", "beacon", "blizzard", "boulder", "brook", "cactus",
+    "canoe", "canyon", "cavern", "chimney", "cliff", "comet", "coral", "crater", "creek", "crystal",
+    "cyclone", "dancer", "den", "desert", "diamond", "dome", "ember", "emerald", "fang", "fjord", "flame",
+    "flare", "flock", "furnace", "galaxy", "geyser", "glade", "gnome", "grove", "harbor", "heron",
+    "hill", "horizon", "hurricane", "iceberg", "ink", "jade", "jungle", "kelp", "lagoon", "lion", "lighthouse",
+    "maple", "meadow", "meteor", "moss", "mount", "mushroom", "nectar", "oasis", "obelisk", "otter",
+    "owl", "peak", "pebble", "pine", "plume", "pond", "prairie", "quartz", "quill", "raccoon",
+    "reef", "ridge", "ripple", "river", "roost", "sail", "savanna", "shadow", "shard", "slope",
+    "snowflake", "sparrow", "spring", "stalactite", "stalagmite", "starling", "stone", "stream", "summit", "surf",
+    "swamp", "thicket", "tidal", "torrent", "tundra", "valley", "vapor", "vine", "vista", "willow", "zeppelin"
+  ]
+}

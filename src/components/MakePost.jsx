@@ -1,8 +1,13 @@
 'use client';
 import { useState } from 'react';
+import words from "../data/word_generator.json";
 
 function getRandomFloat(min, max) {
   return Math.random() * (max - min) + min;
+}
+
+function getRandomWord(list) {
+  return list[Math.floor(Math.random() * list.length)]
 }
 
 export default function AddLibraryButton() {
@@ -11,10 +16,13 @@ export default function AddLibraryButton() {
   async function handleAdd() {
     try {
       console.log("Making POST");
+
+      const generatedName = getRandomWord(words.adjectives) + "-" + getRandomWord(words.nouns)
       const res = await fetch('/api/libraries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          name: generatedName,
           latitude: getRandomFloat(25, 49),
           longitude: getRandomFloat(-66, -125),
         }),

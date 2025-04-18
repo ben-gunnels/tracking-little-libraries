@@ -17,6 +17,8 @@ export default function MapView({ libraries }) {
     mapboxgl.accessToken = mapboxKey
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
+      center: [-98.5795, 39.8283], // Rough center of the contiguous US (longitude, latitude)
+      zoom: 4 // Adjust zoom as needed; 4 is a good "national view"
     });
 
     mapRef.current.on('load', () => {
@@ -119,9 +121,9 @@ export default function MapView({ libraries }) {
             new mapboxgl.Popup()
                 .setLngLat(coordinates)
                 .setHTML(
-                    `coordinates: ${coordinates}`
+                    `<p>coordinates: ${coordinates[0].toFixed(2)}, ${coordinates[1].toFixed(2)}</p> <p>name: ${e.features[0].properties.name}</p>`
                 )
-                .addTo(map);
+                .addTo(mapRef.current);
         });
 
         mapRef.current.on('mouseenter', 'clusters', () => {
@@ -139,6 +141,6 @@ export default function MapView({ libraries }) {
   }, [])
 
   return (
-    <div id={styles.mapContainer} className="bg-gray-200 h-full w-full rounded-md" ref={mapContainerRef}/>
+    <div id={styles.mapContainer}  ref={mapContainerRef}/>
   )
 } 

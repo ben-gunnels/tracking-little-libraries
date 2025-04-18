@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type Library = $Result.DefaultSelection<Prisma.$LibraryPayload>
+/**
+ * Model qrToken
+ * 
+ */
+export type qrToken = $Result.DefaultSelection<Prisma.$qrTokenPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,6 +158,16 @@ export class PrismaClient<
     * ```
     */
   get library(): Prisma.LibraryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.qrToken`: Exposes CRUD operations for the **qrToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more QrTokens
+    * const qrTokens = await prisma.qrToken.findMany()
+    * ```
+    */
+  get qrToken(): Prisma.qrTokenDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +608,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Library: 'Library'
+    Library: 'Library',
+    qrToken: 'qrToken'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +628,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "library"
+      modelProps: "library" | "qrToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -687,6 +703,80 @@ export namespace Prisma {
           count: {
             args: Prisma.LibraryCountArgs<ExtArgs>
             result: $Utils.Optional<LibraryCountAggregateOutputType> | number
+          }
+        }
+      }
+      qrToken: {
+        payload: Prisma.$qrTokenPayload<ExtArgs>
+        fields: Prisma.qrTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.qrTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$qrTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.qrTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$qrTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.qrTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$qrTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.qrTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$qrTokenPayload>
+          }
+          findMany: {
+            args: Prisma.qrTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$qrTokenPayload>[]
+          }
+          create: {
+            args: Prisma.qrTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$qrTokenPayload>
+          }
+          createMany: {
+            args: Prisma.qrTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.qrTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$qrTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.qrTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$qrTokenPayload>
+          }
+          update: {
+            args: Prisma.qrTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$qrTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.qrTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.qrTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.qrTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$qrTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.qrTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$qrTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.QrTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQrToken>
+          }
+          groupBy: {
+            args: Prisma.qrTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QrTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.qrTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<QrTokenCountAggregateOutputType> | number
           }
         }
       }
@@ -775,6 +865,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     library?: LibraryOmit
+    qrToken?: qrTokenOmit
   }
 
   /* Types for Logging */
@@ -895,18 +986,21 @@ export namespace Prisma {
 
   export type LibraryMinAggregateOutputType = {
     id: number | null
+    name: string | null
     latitude: number | null
     longitude: number | null
   }
 
   export type LibraryMaxAggregateOutputType = {
     id: number | null
+    name: string | null
     latitude: number | null
     longitude: number | null
   }
 
   export type LibraryCountAggregateOutputType = {
     id: number
+    name: number
     latitude: number
     longitude: number
     _all: number
@@ -927,18 +1021,21 @@ export namespace Prisma {
 
   export type LibraryMinAggregateInputType = {
     id?: true
+    name?: true
     latitude?: true
     longitude?: true
   }
 
   export type LibraryMaxAggregateInputType = {
     id?: true
+    name?: true
     latitude?: true
     longitude?: true
   }
 
   export type LibraryCountAggregateInputType = {
     id?: true
+    name?: true
     latitude?: true
     longitude?: true
     _all?: true
@@ -1032,6 +1129,7 @@ export namespace Prisma {
 
   export type LibraryGroupByOutputType = {
     id: number
+    name: string
     latitude: number
     longitude: number
     _count: LibraryCountAggregateOutputType | null
@@ -1057,35 +1155,40 @@ export namespace Prisma {
 
   export type LibrarySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     latitude?: boolean
     longitude?: boolean
   }, ExtArgs["result"]["library"]>
 
   export type LibrarySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     latitude?: boolean
     longitude?: boolean
   }, ExtArgs["result"]["library"]>
 
   export type LibrarySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     latitude?: boolean
     longitude?: boolean
   }, ExtArgs["result"]["library"]>
 
   export type LibrarySelectScalar = {
     id?: boolean
+    name?: boolean
     latitude?: boolean
     longitude?: boolean
   }
 
-  export type LibraryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "latitude" | "longitude", ExtArgs["result"]["library"]>
+  export type LibraryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "latitude" | "longitude", ExtArgs["result"]["library"]>
 
   export type $LibraryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Library"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      name: string
       latitude: number
       longitude: number
     }, ExtArgs["result"]["library"]>
@@ -1512,6 +1615,7 @@ export namespace Prisma {
    */
   interface LibraryFieldRefs {
     readonly id: FieldRef<"Library", 'Int'>
+    readonly name: FieldRef<"Library", 'String'>
     readonly latitude: FieldRef<"Library", 'Float'>
     readonly longitude: FieldRef<"Library", 'Float'>
   }
@@ -1881,6 +1985,1048 @@ export namespace Prisma {
 
 
   /**
+   * Model qrToken
+   */
+
+  export type AggregateQrToken = {
+    _count: QrTokenCountAggregateOutputType | null
+    _avg: QrTokenAvgAggregateOutputType | null
+    _sum: QrTokenSumAggregateOutputType | null
+    _min: QrTokenMinAggregateOutputType | null
+    _max: QrTokenMaxAggregateOutputType | null
+  }
+
+  export type QrTokenAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type QrTokenSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type QrTokenMinAggregateOutputType = {
+    id: number | null
+    token: string | null
+    type: string | null
+    used: boolean | null
+    createdAt: Date | null
+    usedAt: Date | null
+  }
+
+  export type QrTokenMaxAggregateOutputType = {
+    id: number | null
+    token: string | null
+    type: string | null
+    used: boolean | null
+    createdAt: Date | null
+    usedAt: Date | null
+  }
+
+  export type QrTokenCountAggregateOutputType = {
+    id: number
+    token: number
+    type: number
+    used: number
+    createdAt: number
+    usedAt: number
+    _all: number
+  }
+
+
+  export type QrTokenAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type QrTokenSumAggregateInputType = {
+    id?: true
+  }
+
+  export type QrTokenMinAggregateInputType = {
+    id?: true
+    token?: true
+    type?: true
+    used?: true
+    createdAt?: true
+    usedAt?: true
+  }
+
+  export type QrTokenMaxAggregateInputType = {
+    id?: true
+    token?: true
+    type?: true
+    used?: true
+    createdAt?: true
+    usedAt?: true
+  }
+
+  export type QrTokenCountAggregateInputType = {
+    id?: true
+    token?: true
+    type?: true
+    used?: true
+    createdAt?: true
+    usedAt?: true
+    _all?: true
+  }
+
+  export type QrTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which qrToken to aggregate.
+     */
+    where?: qrTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of qrTokens to fetch.
+     */
+    orderBy?: qrTokenOrderByWithRelationInput | qrTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: qrTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` qrTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` qrTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned qrTokens
+    **/
+    _count?: true | QrTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: QrTokenAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: QrTokenSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QrTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QrTokenMaxAggregateInputType
+  }
+
+  export type GetQrTokenAggregateType<T extends QrTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateQrToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQrToken[P]>
+      : GetScalarType<T[P], AggregateQrToken[P]>
+  }
+
+
+
+
+  export type qrTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: qrTokenWhereInput
+    orderBy?: qrTokenOrderByWithAggregationInput | qrTokenOrderByWithAggregationInput[]
+    by: QrTokenScalarFieldEnum[] | QrTokenScalarFieldEnum
+    having?: qrTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QrTokenCountAggregateInputType | true
+    _avg?: QrTokenAvgAggregateInputType
+    _sum?: QrTokenSumAggregateInputType
+    _min?: QrTokenMinAggregateInputType
+    _max?: QrTokenMaxAggregateInputType
+  }
+
+  export type QrTokenGroupByOutputType = {
+    id: number
+    token: string
+    type: string
+    used: boolean
+    createdAt: Date
+    usedAt: Date | null
+    _count: QrTokenCountAggregateOutputType | null
+    _avg: QrTokenAvgAggregateOutputType | null
+    _sum: QrTokenSumAggregateOutputType | null
+    _min: QrTokenMinAggregateOutputType | null
+    _max: QrTokenMaxAggregateOutputType | null
+  }
+
+  type GetQrTokenGroupByPayload<T extends qrTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QrTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QrTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QrTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], QrTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type qrTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    type?: boolean
+    used?: boolean
+    createdAt?: boolean
+    usedAt?: boolean
+  }, ExtArgs["result"]["qrToken"]>
+
+  export type qrTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    type?: boolean
+    used?: boolean
+    createdAt?: boolean
+    usedAt?: boolean
+  }, ExtArgs["result"]["qrToken"]>
+
+  export type qrTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    type?: boolean
+    used?: boolean
+    createdAt?: boolean
+    usedAt?: boolean
+  }, ExtArgs["result"]["qrToken"]>
+
+  export type qrTokenSelectScalar = {
+    id?: boolean
+    token?: boolean
+    type?: boolean
+    used?: boolean
+    createdAt?: boolean
+    usedAt?: boolean
+  }
+
+  export type qrTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "type" | "used" | "createdAt" | "usedAt", ExtArgs["result"]["qrToken"]>
+
+  export type $qrTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "qrToken"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      token: string
+      type: string
+      used: boolean
+      createdAt: Date
+      usedAt: Date | null
+    }, ExtArgs["result"]["qrToken"]>
+    composites: {}
+  }
+
+  type qrTokenGetPayload<S extends boolean | null | undefined | qrTokenDefaultArgs> = $Result.GetResult<Prisma.$qrTokenPayload, S>
+
+  type qrTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<qrTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QrTokenCountAggregateInputType | true
+    }
+
+  export interface qrTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['qrToken'], meta: { name: 'qrToken' } }
+    /**
+     * Find zero or one QrToken that matches the filter.
+     * @param {qrTokenFindUniqueArgs} args - Arguments to find a QrToken
+     * @example
+     * // Get one QrToken
+     * const qrToken = await prisma.qrToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends qrTokenFindUniqueArgs>(args: SelectSubset<T, qrTokenFindUniqueArgs<ExtArgs>>): Prisma__qrTokenClient<$Result.GetResult<Prisma.$qrTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one QrToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {qrTokenFindUniqueOrThrowArgs} args - Arguments to find a QrToken
+     * @example
+     * // Get one QrToken
+     * const qrToken = await prisma.qrToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends qrTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, qrTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__qrTokenClient<$Result.GetResult<Prisma.$qrTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QrToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {qrTokenFindFirstArgs} args - Arguments to find a QrToken
+     * @example
+     * // Get one QrToken
+     * const qrToken = await prisma.qrToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends qrTokenFindFirstArgs>(args?: SelectSubset<T, qrTokenFindFirstArgs<ExtArgs>>): Prisma__qrTokenClient<$Result.GetResult<Prisma.$qrTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QrToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {qrTokenFindFirstOrThrowArgs} args - Arguments to find a QrToken
+     * @example
+     * // Get one QrToken
+     * const qrToken = await prisma.qrToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends qrTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, qrTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__qrTokenClient<$Result.GetResult<Prisma.$qrTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more QrTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {qrTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all QrTokens
+     * const qrTokens = await prisma.qrToken.findMany()
+     * 
+     * // Get first 10 QrTokens
+     * const qrTokens = await prisma.qrToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const qrTokenWithIdOnly = await prisma.qrToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends qrTokenFindManyArgs>(args?: SelectSubset<T, qrTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$qrTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a QrToken.
+     * @param {qrTokenCreateArgs} args - Arguments to create a QrToken.
+     * @example
+     * // Create one QrToken
+     * const QrToken = await prisma.qrToken.create({
+     *   data: {
+     *     // ... data to create a QrToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends qrTokenCreateArgs>(args: SelectSubset<T, qrTokenCreateArgs<ExtArgs>>): Prisma__qrTokenClient<$Result.GetResult<Prisma.$qrTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many QrTokens.
+     * @param {qrTokenCreateManyArgs} args - Arguments to create many QrTokens.
+     * @example
+     * // Create many QrTokens
+     * const qrToken = await prisma.qrToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends qrTokenCreateManyArgs>(args?: SelectSubset<T, qrTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many QrTokens and returns the data saved in the database.
+     * @param {qrTokenCreateManyAndReturnArgs} args - Arguments to create many QrTokens.
+     * @example
+     * // Create many QrTokens
+     * const qrToken = await prisma.qrToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many QrTokens and only return the `id`
+     * const qrTokenWithIdOnly = await prisma.qrToken.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends qrTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, qrTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$qrTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a QrToken.
+     * @param {qrTokenDeleteArgs} args - Arguments to delete one QrToken.
+     * @example
+     * // Delete one QrToken
+     * const QrToken = await prisma.qrToken.delete({
+     *   where: {
+     *     // ... filter to delete one QrToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends qrTokenDeleteArgs>(args: SelectSubset<T, qrTokenDeleteArgs<ExtArgs>>): Prisma__qrTokenClient<$Result.GetResult<Prisma.$qrTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one QrToken.
+     * @param {qrTokenUpdateArgs} args - Arguments to update one QrToken.
+     * @example
+     * // Update one QrToken
+     * const qrToken = await prisma.qrToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends qrTokenUpdateArgs>(args: SelectSubset<T, qrTokenUpdateArgs<ExtArgs>>): Prisma__qrTokenClient<$Result.GetResult<Prisma.$qrTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more QrTokens.
+     * @param {qrTokenDeleteManyArgs} args - Arguments to filter QrTokens to delete.
+     * @example
+     * // Delete a few QrTokens
+     * const { count } = await prisma.qrToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends qrTokenDeleteManyArgs>(args?: SelectSubset<T, qrTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QrTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {qrTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many QrTokens
+     * const qrToken = await prisma.qrToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends qrTokenUpdateManyArgs>(args: SelectSubset<T, qrTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QrTokens and returns the data updated in the database.
+     * @param {qrTokenUpdateManyAndReturnArgs} args - Arguments to update many QrTokens.
+     * @example
+     * // Update many QrTokens
+     * const qrToken = await prisma.qrToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more QrTokens and only return the `id`
+     * const qrTokenWithIdOnly = await prisma.qrToken.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends qrTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, qrTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$qrTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one QrToken.
+     * @param {qrTokenUpsertArgs} args - Arguments to update or create a QrToken.
+     * @example
+     * // Update or create a QrToken
+     * const qrToken = await prisma.qrToken.upsert({
+     *   create: {
+     *     // ... data to create a QrToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the QrToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends qrTokenUpsertArgs>(args: SelectSubset<T, qrTokenUpsertArgs<ExtArgs>>): Prisma__qrTokenClient<$Result.GetResult<Prisma.$qrTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of QrTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {qrTokenCountArgs} args - Arguments to filter QrTokens to count.
+     * @example
+     * // Count the number of QrTokens
+     * const count = await prisma.qrToken.count({
+     *   where: {
+     *     // ... the filter for the QrTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends qrTokenCountArgs>(
+      args?: Subset<T, qrTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QrTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a QrToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QrTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QrTokenAggregateArgs>(args: Subset<T, QrTokenAggregateArgs>): Prisma.PrismaPromise<GetQrTokenAggregateType<T>>
+
+    /**
+     * Group by QrToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {qrTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends qrTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: qrTokenGroupByArgs['orderBy'] }
+        : { orderBy?: qrTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, qrTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQrTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the qrToken model
+   */
+  readonly fields: qrTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for qrToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__qrTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the qrToken model
+   */
+  interface qrTokenFieldRefs {
+    readonly id: FieldRef<"qrToken", 'Int'>
+    readonly token: FieldRef<"qrToken", 'String'>
+    readonly type: FieldRef<"qrToken", 'String'>
+    readonly used: FieldRef<"qrToken", 'Boolean'>
+    readonly createdAt: FieldRef<"qrToken", 'DateTime'>
+    readonly usedAt: FieldRef<"qrToken", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * qrToken findUnique
+   */
+  export type qrTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+    /**
+     * Filter, which qrToken to fetch.
+     */
+    where: qrTokenWhereUniqueInput
+  }
+
+  /**
+   * qrToken findUniqueOrThrow
+   */
+  export type qrTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+    /**
+     * Filter, which qrToken to fetch.
+     */
+    where: qrTokenWhereUniqueInput
+  }
+
+  /**
+   * qrToken findFirst
+   */
+  export type qrTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+    /**
+     * Filter, which qrToken to fetch.
+     */
+    where?: qrTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of qrTokens to fetch.
+     */
+    orderBy?: qrTokenOrderByWithRelationInput | qrTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for qrTokens.
+     */
+    cursor?: qrTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` qrTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` qrTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of qrTokens.
+     */
+    distinct?: QrTokenScalarFieldEnum | QrTokenScalarFieldEnum[]
+  }
+
+  /**
+   * qrToken findFirstOrThrow
+   */
+  export type qrTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+    /**
+     * Filter, which qrToken to fetch.
+     */
+    where?: qrTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of qrTokens to fetch.
+     */
+    orderBy?: qrTokenOrderByWithRelationInput | qrTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for qrTokens.
+     */
+    cursor?: qrTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` qrTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` qrTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of qrTokens.
+     */
+    distinct?: QrTokenScalarFieldEnum | QrTokenScalarFieldEnum[]
+  }
+
+  /**
+   * qrToken findMany
+   */
+  export type qrTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+    /**
+     * Filter, which qrTokens to fetch.
+     */
+    where?: qrTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of qrTokens to fetch.
+     */
+    orderBy?: qrTokenOrderByWithRelationInput | qrTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing qrTokens.
+     */
+    cursor?: qrTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` qrTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` qrTokens.
+     */
+    skip?: number
+    distinct?: QrTokenScalarFieldEnum | QrTokenScalarFieldEnum[]
+  }
+
+  /**
+   * qrToken create
+   */
+  export type qrTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+    /**
+     * The data needed to create a qrToken.
+     */
+    data: XOR<qrTokenCreateInput, qrTokenUncheckedCreateInput>
+  }
+
+  /**
+   * qrToken createMany
+   */
+  export type qrTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many qrTokens.
+     */
+    data: qrTokenCreateManyInput | qrTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * qrToken createManyAndReturn
+   */
+  export type qrTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many qrTokens.
+     */
+    data: qrTokenCreateManyInput | qrTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * qrToken update
+   */
+  export type qrTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+    /**
+     * The data needed to update a qrToken.
+     */
+    data: XOR<qrTokenUpdateInput, qrTokenUncheckedUpdateInput>
+    /**
+     * Choose, which qrToken to update.
+     */
+    where: qrTokenWhereUniqueInput
+  }
+
+  /**
+   * qrToken updateMany
+   */
+  export type qrTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update qrTokens.
+     */
+    data: XOR<qrTokenUpdateManyMutationInput, qrTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which qrTokens to update
+     */
+    where?: qrTokenWhereInput
+    /**
+     * Limit how many qrTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * qrToken updateManyAndReturn
+   */
+  export type qrTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update qrTokens.
+     */
+    data: XOR<qrTokenUpdateManyMutationInput, qrTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which qrTokens to update
+     */
+    where?: qrTokenWhereInput
+    /**
+     * Limit how many qrTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * qrToken upsert
+   */
+  export type qrTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+    /**
+     * The filter to search for the qrToken to update in case it exists.
+     */
+    where: qrTokenWhereUniqueInput
+    /**
+     * In case the qrToken found by the `where` argument doesn't exist, create a new qrToken with this data.
+     */
+    create: XOR<qrTokenCreateInput, qrTokenUncheckedCreateInput>
+    /**
+     * In case the qrToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<qrTokenUpdateInput, qrTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * qrToken delete
+   */
+  export type qrTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+    /**
+     * Filter which qrToken to delete.
+     */
+    where: qrTokenWhereUniqueInput
+  }
+
+  /**
+   * qrToken deleteMany
+   */
+  export type qrTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which qrTokens to delete
+     */
+    where?: qrTokenWhereInput
+    /**
+     * Limit how many qrTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * qrToken without action
+   */
+  export type qrTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the qrToken
+     */
+    select?: qrTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the qrToken
+     */
+    omit?: qrTokenOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -1896,11 +3042,24 @@ export namespace Prisma {
 
   export const LibraryScalarFieldEnum: {
     id: 'id',
+    name: 'name',
     latitude: 'latitude',
     longitude: 'longitude'
   };
 
   export type LibraryScalarFieldEnum = (typeof LibraryScalarFieldEnum)[keyof typeof LibraryScalarFieldEnum]
+
+
+  export const QrTokenScalarFieldEnum: {
+    id: 'id',
+    token: 'token',
+    type: 'type',
+    used: 'used',
+    createdAt: 'createdAt',
+    usedAt: 'usedAt'
+  };
+
+  export type QrTokenScalarFieldEnum = (typeof QrTokenScalarFieldEnum)[keyof typeof QrTokenScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1909,6 +3068,22 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
+  };
+
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -1931,6 +3106,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'String'
+   */
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'String[]'
+   */
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1942,6 +3131,27 @@ export namespace Prisma {
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
   /**
    * Deep Input Types
    */
@@ -1952,27 +3162,31 @@ export namespace Prisma {
     OR?: LibraryWhereInput[]
     NOT?: LibraryWhereInput | LibraryWhereInput[]
     id?: IntFilter<"Library"> | number
+    name?: StringFilter<"Library"> | string
     latitude?: FloatFilter<"Library"> | number
     longitude?: FloatFilter<"Library"> | number
   }
 
   export type LibraryOrderByWithRelationInput = {
     id?: SortOrder
+    name?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
   }
 
   export type LibraryWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    name?: string
     AND?: LibraryWhereInput | LibraryWhereInput[]
     OR?: LibraryWhereInput[]
     NOT?: LibraryWhereInput | LibraryWhereInput[]
     latitude?: FloatFilter<"Library"> | number
     longitude?: FloatFilter<"Library"> | number
-  }, "id">
+  }, "id" | "name">
 
   export type LibraryOrderByWithAggregationInput = {
     id?: SortOrder
+    name?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
     _count?: LibraryCountOrderByAggregateInput
@@ -1987,47 +3201,174 @@ export namespace Prisma {
     OR?: LibraryScalarWhereWithAggregatesInput[]
     NOT?: LibraryScalarWhereWithAggregatesInput | LibraryScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Library"> | number
+    name?: StringWithAggregatesFilter<"Library"> | string
     latitude?: FloatWithAggregatesFilter<"Library"> | number
     longitude?: FloatWithAggregatesFilter<"Library"> | number
   }
 
+  export type qrTokenWhereInput = {
+    AND?: qrTokenWhereInput | qrTokenWhereInput[]
+    OR?: qrTokenWhereInput[]
+    NOT?: qrTokenWhereInput | qrTokenWhereInput[]
+    id?: IntFilter<"qrToken"> | number
+    token?: StringFilter<"qrToken"> | string
+    type?: StringFilter<"qrToken"> | string
+    used?: BoolFilter<"qrToken"> | boolean
+    createdAt?: DateTimeFilter<"qrToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"qrToken"> | Date | string | null
+  }
+
+  export type qrTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    token?: SortOrder
+    type?: SortOrder
+    used?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+  }
+
+  export type qrTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    token?: string
+    AND?: qrTokenWhereInput | qrTokenWhereInput[]
+    OR?: qrTokenWhereInput[]
+    NOT?: qrTokenWhereInput | qrTokenWhereInput[]
+    type?: StringFilter<"qrToken"> | string
+    used?: BoolFilter<"qrToken"> | boolean
+    createdAt?: DateTimeFilter<"qrToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"qrToken"> | Date | string | null
+  }, "id" | "token">
+
+  export type qrTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    token?: SortOrder
+    type?: SortOrder
+    used?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    _count?: qrTokenCountOrderByAggregateInput
+    _avg?: qrTokenAvgOrderByAggregateInput
+    _max?: qrTokenMaxOrderByAggregateInput
+    _min?: qrTokenMinOrderByAggregateInput
+    _sum?: qrTokenSumOrderByAggregateInput
+  }
+
+  export type qrTokenScalarWhereWithAggregatesInput = {
+    AND?: qrTokenScalarWhereWithAggregatesInput | qrTokenScalarWhereWithAggregatesInput[]
+    OR?: qrTokenScalarWhereWithAggregatesInput[]
+    NOT?: qrTokenScalarWhereWithAggregatesInput | qrTokenScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"qrToken"> | number
+    token?: StringWithAggregatesFilter<"qrToken"> | string
+    type?: StringWithAggregatesFilter<"qrToken"> | string
+    used?: BoolWithAggregatesFilter<"qrToken"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"qrToken"> | Date | string
+    usedAt?: DateTimeNullableWithAggregatesFilter<"qrToken"> | Date | string | null
+  }
+
   export type LibraryCreateInput = {
+    name: string
     latitude: number
     longitude: number
   }
 
   export type LibraryUncheckedCreateInput = {
     id?: number
+    name: string
     latitude: number
     longitude: number
   }
 
   export type LibraryUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
   }
 
   export type LibraryUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
   }
 
   export type LibraryCreateManyInput = {
     id?: number
+    name: string
     latitude: number
     longitude: number
   }
 
   export type LibraryUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
   }
 
   export type LibraryUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type qrTokenCreateInput = {
+    token: string
+    type: string
+    used?: boolean
+    createdAt?: Date | string
+    usedAt?: Date | string | null
+  }
+
+  export type qrTokenUncheckedCreateInput = {
+    id?: number
+    token: string
+    type: string
+    used?: boolean
+    createdAt?: Date | string
+    usedAt?: Date | string | null
+  }
+
+  export type qrTokenUpdateInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    used?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type qrTokenUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    used?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type qrTokenCreateManyInput = {
+    id?: number
+    token: string
+    type: string
+    used?: boolean
+    createdAt?: Date | string
+    usedAt?: Date | string | null
+  }
+
+  export type qrTokenUpdateManyMutationInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    used?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type qrTokenUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    used?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -2039,6 +3380,21 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -2054,6 +3410,7 @@ export namespace Prisma {
 
   export type LibraryCountOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
   }
@@ -2066,12 +3423,14 @@ export namespace Prisma {
 
   export type LibraryMaxOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
   }
 
   export type LibraryMinOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
   }
@@ -2098,6 +3457,24 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -2112,6 +3489,113 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type qrTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    type?: SortOrder
+    used?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrder
+  }
+
+  export type qrTokenAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type qrTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    type?: SortOrder
+    used?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrder
+  }
+
+  export type qrTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    type?: SortOrder
+    used?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrder
+  }
+
+  export type qrTokenSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -2130,6 +3614,18 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -2139,6 +3635,20 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type NestedFloatFilter<$PrismaModel = never> = {
@@ -2168,6 +3678,23 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -2182,6 +3709,80 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
 

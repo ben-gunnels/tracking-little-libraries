@@ -1,6 +1,7 @@
 // src/components/Header.jsx
 "use client"
 import { useState } from 'react';
+import Link from 'next/link';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -22,10 +23,8 @@ export default function Header() {
 
       <nav className={`${styles.nav} ${isOpen ? styles.showMenu : ''}`}>
         <ul className={styles.navList}>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/about">About</Link></li>
         </ul>
       </nav>
     </header>

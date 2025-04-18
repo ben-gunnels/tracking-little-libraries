@@ -4,7 +4,6 @@ import prisma from '../../lib/prisma';
 
 export default async function ServerWrapper() {
   const libraries = await prisma.library.findMany();
-  console.log(libraries);
 
   const geoJson = {
     type: 'FeatureCollection',
@@ -16,14 +15,15 @@ export default async function ServerWrapper() {
       },
       properties: {
         id: lib.id,
+        name: lib.name
       },
     })),
   };
 
   return (
-    <>
-      <ListView libraries={libraries} />
-      <MapView libraries={geoJson} />
-    </>
+    <div>
+        <MapView libraries={geoJson} />
+        <ListView libraries={libraries} />
+    </div>
   );
 }

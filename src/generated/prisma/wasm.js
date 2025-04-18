@@ -119,8 +119,18 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.LibraryScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   latitude: 'latitude',
   longitude: 'longitude'
+};
+
+exports.Prisma.QrTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  type: 'type',
+  used: 'used',
+  createdAt: 'createdAt',
+  usedAt: 'usedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -128,9 +138,20 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  Library: 'Library'
+  Library: 'Library',
+  qrToken: 'qrToken'
 };
 
 /**
