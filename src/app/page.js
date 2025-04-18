@@ -1,5 +1,4 @@
-import Listview from "../components/ListView"
-import MapView from "../components/MapView"
+import ServerWrapper from "@/components/ServerWrapper";
 import AddLibraryButton from "../components/MakePost"
 
 import Image from "next/image";
@@ -7,8 +6,7 @@ export default function Home() {
   return (
     <div className="grid items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-kirang-haerang)]">
       <div className="outline-red w-full max-w-7xl grid gap-8 grid-cols-1 lg:grid-cols-[300px_1fr] h-full w-full">
-        <Listview />
-        <MapView />
+        <ServerWrapper />
       </div>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a

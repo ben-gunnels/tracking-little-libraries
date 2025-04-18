@@ -1,6 +1,10 @@
 'use client';
 import { useState } from 'react';
 
+function getRandomFloat(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 export default function AddLibraryButton() {
   const [status, setStatus] = useState(null);
 
@@ -11,8 +15,8 @@ export default function AddLibraryButton() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          latitude: 37.7749,
-          longitude: -122.4194,
+          latitude: getRandomFloat(25, 49),
+          longitude: getRandomFloat(-66, -125),
         }),
       });
 
