@@ -18,8 +18,8 @@ export default function AboutPage() {
   
           <h2 className="text-2xl font-semibold mb-3">Who We Are</h2>
           <p className="mb-6 text-md leading-relaxed">
-            We're a small team of developers, and book lovers who wanted to create a simple tool
-            for sharing these amazing grassroots book exchanges. If you spot a library we haven't mapped — you
+            We&apos;re passionate about libraries and it&apos;s our mission to connect them all.
+            for sharing these amazing grassroots book exchanges. If you spot a library we haven&apos;t mapped — you
             can help us grow!
           </p>
   
