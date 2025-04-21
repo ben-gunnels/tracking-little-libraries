@@ -141,6 +141,6 @@ export default function MapView({ libraries }) {
   }, [])
 
   return (
-    <div id={styles.mapContainer}  ref={mapContainerRef}/>
+    <div className="w-full" id={styles.mapContainer}  ref={mapContainerRef}/>
   )
 } 

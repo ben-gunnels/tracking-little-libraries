@@ -1,0 +1,10 @@
+.wrapperOuterBox {
+
+}
+
+
+@media (max-width: 768px) {
+    .wrapperOuterBox {
+      flex-direction: column;
+    }
+  }
