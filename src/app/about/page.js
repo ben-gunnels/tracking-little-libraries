@@ -25,7 +25,7 @@ export default function AboutPage() {
   
           <h2 className="text-2xl font-semibold mb-3">Contact Us</h2>
           <p className="mb-6 text-md leading-relaxed">
-            Want to add your little library to our database? Send an email to{' '}
+            Want to add your little library to our database? Send an email to
             <a href="mailto:trackinglittlelibraries@gmail.com" className="text-blue-600 underline">
               trackinglittlelibraries@gmail.com
             </a>.
