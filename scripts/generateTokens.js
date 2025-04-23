@@ -41,6 +41,6 @@ async function generateTokens(count = 10) {
   console.log(`🎉 Generated ${count} tokens`);
 }
 
-generateTokens(10)
+generateTokens(25)
   .catch(console.error)
   .finally(() => prisma.$disconnect());
