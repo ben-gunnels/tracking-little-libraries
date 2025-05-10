@@ -13,7 +13,7 @@ export default function AboutPage() {
           <p className="mb-6 text-md leading-relaxed">
             We want to uncover the little libraries all around us, making reading more accessible for everyone.
             Our goal is to make it easy for people to discover and contribute to little libraries in their
-            neighborhoods. We believe in the power of books, accessibility, and community engagement.
+            neighborhoods and beyond. We believe in the power of books, accessibility, and community engagement.
           </p>
   
           <h2 className="text-2xl font-semibold mb-3">Who We Are</h2>
